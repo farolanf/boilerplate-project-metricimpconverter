@@ -9,18 +9,18 @@
 function ConvertHandler() {
 
   this.getNum = function(input) {
-    const inputRe = /^(-?[0-9./]+)?\s*[a-zA-Z]+$/
+    const inputRe = /^([0-9./-]+)?\s*[a-zA-Z]+$/
     const numberRe = /^(?:-?\d+(?:\.\d*)?)(?:\/(?:-?\d+(?:\.\d*)?))?$/
 
-    var result = 1;
+    var result = 'invalid number';
 
     const match = input.match(inputRe)
     
     if (match) {
-      if (numberRe.test(match[1])) {
-        result = match[1]
-      } else {
-        result = 'invalid number'
+      if (!match[1]) {
+        result = 1
+      } else if (numberRe.test(match[1])) {
+        eval('result = ' + match[1])
       }
     }
     
