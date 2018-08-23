@@ -9,11 +9,21 @@
 function ConvertHandler() {
 
   this.getNum = function(input) {
+    const inputRe = /^(-?[0-9./]+)?\s*[a-zA-Z]+$/
+    const numberRe = /^(?:-?\d+(?:\.\d*)?)(?:\/(?:-?\d+(?:\.\d*)?))?$/
+
     var result = 1;
-    const match = input.match(/^(-?\d+(?:\.\d*)?)?\s*\w+$/)
+
+    const match = input.match(inputRe)
+    
     if (match) {
-      result = match[1]
+      if (numberRe.test(match[1])) {
+        result = match[1]
+      } else {
+        result = 'invalid number'
+      }
     }
+    
     return result;
   };
   
