@@ -9,13 +9,21 @@
 function ConvertHandler() {
   
   this.getNum = function(input) {
-    var result;
-    result = !input ? 1 : input.sli
+    var result = null;
+    const match = input.match(/^(-?[0-9.,/]+)/)
+    if (match) {
+      try {
+        eval('result = ' + match[1])
+      }
+      catch (x) {
+        result = false
+      }
+    }
     return result;
   };
   
   this.getUnit = function(input) {
-    var result;
+    var result = null;
     
     return result;
   };
