@@ -12,8 +12,13 @@ var ConvertHandler = require('../controllers/convertHandler.js');
 
 var convertHandler = new ConvertHandler();
 
+/* global suite test */
 suite('Unit Tests', function(){
-  
+
+  // const galToL = 3.78541;
+  // const lbsToKg = 0.453592;
+  // const miToKm = 1.60934;
+
   suite('Function convertHandler.getNum(input)', function() {
     
     test('Whole number input', function(done) {
@@ -23,23 +28,27 @@ suite('Unit Tests', function(){
     });
     
     test('Decimal Input', function(done) {
-      
-      //done();
+      var input = '3.2L';
+      assert.equal(convertHandler.getNum(input), 3.2);
+      done();
     });
     
     test('Fractional Input', function(done) {
-      
-      //done();
+      var input = '1/2L';
+      assert.equal(convertHandler.getNum(input), 0.5);
+      done();
     });
     
     test('Fractional Input w/ Decimal', function(done) {
-      
-      //done();
+      var input = '0.1/0.2L';
+      assert.equal(convertHandler.getNum(input), 0.5);
+      done();
     });
     
     test('Invalid Input (double fraction)', function(done) {
-      
-      //done();
+      var input = '0.1/0.2L';
+      assert.equal(convertHandler.getNum(input), 0.5);
+      done();
     });
     
     test('No Numerical Input', function(done) {
