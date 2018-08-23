@@ -88,7 +88,17 @@ suite('Unit Tests', function(){
   suite('Function convertHandler.spellOutUnit(unit)', function() {
     
     test('For Each Valid Unit Inputs', function(done) {
-      //see above example for hint
+      const units = {
+        gal: 'gallons',
+        l: 'litres',
+        lbs: 'pounds',
+        kg: 'kilograms',
+        mi: 'miles',
+        km: 'kilometers'
+      }
+      Object.keys(units).forEach(unit => {
+        assert.equal(convertHandler.spellOutUnit(unit), units[unit])
+      })
       done();
     });
     
@@ -104,8 +114,10 @@ suite('Unit Tests', function(){
     });
     
     test('L to Gal', function(done) {
-      
-      //done();
+      var input = [10, 'l'];
+      var expected = 37.8541;
+      assert.approximately(convertHandler.convert(input[0],input[1]),expected,0.1); //0.1 tolerance
+      done();
     });
     
     test('Mi to Km', function(done) {
