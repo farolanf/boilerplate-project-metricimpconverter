@@ -13,6 +13,7 @@ var server = require('../server');
 
 chai.use(chaiHttp);
 
+/* global suite test */
 suite('Functional Tests', function() {
 
   suite('Routing Tests', function() {
@@ -34,8 +35,15 @@ suite('Functional Tests', function() {
       });
       
       test('Convert 32g (invalid input unit)', function(done) {
-        
-        //done();
+        chai.request(server)
+          .get('/api/convert')
+          .query({ input: '32g' })
+          .end((err, res) => {
+            assert.equal(res.status, 200)
+            assert.equal(res.body.initNum, 32)
+            assert.equal(res.body.initUnit, 'g')
+            assert.equal(res.body.returnNum, )
+          })
       });
       
       test('Convert 3/7.2/4kg (invalid number)', function(done) {

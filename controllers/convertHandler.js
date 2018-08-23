@@ -16,14 +16,14 @@ function ConvertHandler() {
         eval('result = ' + match[1])
       }
       catch (x) {
-        result = false
+        result = 'invalid number'
       }
     }
     return result;
   };
   
   this.getUnit = function(input) {
-    var result = false;
+    var result = 'invalid unit';
     const match = input.match(/(gal|l|lbs|kg|mi|km)\s*$/i)
     if (match) {
       result = match[1]
