@@ -10,7 +10,7 @@ function ConvertHandler() {
 
   this.getNum = function(input) {
     var result = 1;
-    const match = input.match(/^(-?\d+(?:\.\d*)?)/)
+    const match = input.match(/^(-?\d+(?:\.\d*)?)?\s*\w+$/)
     if (match) {
       result = match[1]
     }
