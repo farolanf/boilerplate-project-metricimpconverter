@@ -73,10 +73,20 @@ function ConvertHandler() {
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
     const unitStr = {
-      gallon
+      gal1: 'gallon',
+      gal: 'gallons',
+      L1: 'litre',
+      L: 'litres',
+      lbs1: 'pound',
+      lbs: 'pounds',
+      mi1: 'mile',
+      mi: 'miles',
+      km1: 'kilometer',
+      km: 'kilometers'
     }
     var result;
-    var fromUnit = initNum
+    var fromUnit = Math.abs(initNum) === 1 ? unitStr[initUnit + '1'] : unitStr[initUnit]
+    var toUnit = Math.abs(returnNum) === 1 ? unitStr[returnUnit + '1'] : unitStr[returnUnit]
     result = `${initNum} ${fromUnit} converts to ${returnNum} ${toUnit}`
     return result;
   };
