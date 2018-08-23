@@ -36,7 +36,7 @@ function ConvertHandler() {
     const expect = ['l', 'gal', 'kg', 'lbs', 'km', 'mi']
     var result;
     const i = input.indexOf(initUnit.toLowerCase())
-    if (i === -1) return false
+    if (i === -1) return initUnit
     return result = expect[i];
   };
 
@@ -49,7 +49,7 @@ function ConvertHandler() {
       mi: 'miles',
       km: 'kilometers'
     }
-    return name[unit.toLowerCase()] ? name[unit.toLowerCase()] : false;
+    return name[unit.toLowerCase()] ? name[unit.toLowerCase()] : unit;
   };
   
   this.convert = function(initNum, initUnit) {
@@ -64,8 +64,9 @@ function ConvertHandler() {
       case 'kg': result = initNum / lbsToKg; break;
       case 'mi': result = initNum * miToKm; break;
       case 'km': result = initNum / miToKm; break;
+      default: return initNum
     }
-    return result;
+    return Math.round(result * 1e5) / 1e5;
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {

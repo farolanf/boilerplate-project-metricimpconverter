@@ -43,7 +43,7 @@ suite('Unit Tests', function(){
     
     test('Invalid Input (double fraction)', function(done) {
       var input = '0..2L';
-      assert.equal(convertHandler.getNum(input), false);
+      assert.equal(convertHandler.getNum(input), 'invalid number');
       done();
     });
     
@@ -66,7 +66,7 @@ suite('Unit Tests', function(){
     });
     
     test('Unknown Unit Input', function(done) {
-      assert.equal(convertHandler.getUnit('1lo'), false)
+      assert.equal(convertHandler.getUnit('1lo'), 'invalid unit')
       done();
     });  
     

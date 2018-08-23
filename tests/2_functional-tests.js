@@ -42,7 +42,9 @@ suite('Functional Tests', function() {
             assert.equal(res.status, 200)
             assert.equal(res.body.initNum, 32)
             assert.equal(res.body.initUnit, 'g')
-            assert.equal(res.body.returnNum, )
+            assert.equal(res.body.returnNum, 32)
+            assert.equal(res.body.returnUnit, 'invalid unit')
+            done()
           })
       });
       
