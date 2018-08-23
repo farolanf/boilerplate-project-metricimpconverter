@@ -32,8 +32,18 @@ function ConvertHandler() {
   };
   
   this.getReturnUnit = function(initUnit) {
-    var result;
-    
+    const pairs = {
+      gal: 'L',
+      lbs: 'kg',
+      mi: 'km'
+    }
+    const pairsReverse = Object.keys(pairs).reduce((obj, key, pairs) => {
+      obj[pairs[key]] = key
+      return obj
+    }, {})
+    var result = false;
+    result = pairs[initUnit] ? pairs[initUnit]
+      : pairs
     return result;
   };
 
