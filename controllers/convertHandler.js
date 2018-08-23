@@ -23,8 +23,11 @@ function ConvertHandler() {
   };
   
   this.getUnit = function(input) {
-    var result = null;
-    
+    var result = false;
+    const match = input.match(/(gal|L|lbs|kg|mi|km)\s*$/)
+    if (match) {
+      result = match[1]
+    }
     return result;
   };
   
