@@ -10,7 +10,7 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     var result;
-    
+    result = !input ? 1 : input.sli
     return result;
   };
   
