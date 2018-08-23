@@ -7,6 +7,17 @@
 */
 
 function ConvertHandler() {
+
+  const pairs = {
+    gal: 'L',
+    lbs: 'kg',
+    mi: 'km'
+  }
+
+  const pairsReverse = Object.keys(pairs).reduce((obj, key, pairs) => {
+    obj[pairs[key]] = key
+    return obj
+  }, {})
   
   this.getNum = function(input) {
     var result = null;
@@ -32,18 +43,9 @@ function ConvertHandler() {
   };
   
   this.getReturnUnit = function(initUnit) {
-    const pairs = {
-      gal: 'L',
-      lbs: 'kg',
-      mi: 'km'
-    }
-    const pairsReverse = Object.keys(pairs).reduce((obj, key, pairs) => {
-      obj[pairs[key]] = key
-      return obj
-    }, {})
-    var result = false;
-    result = pairs[initUnit] ? pairs[initUnit]
-      : pairs
+    var result;
+    result = pairs[initUnit] ? pairs[initUnit] 
+      : pairsReverse[initUnit] ? pairsReverse[initUnit] : false
     return result;
   };
 
@@ -58,13 +60,24 @@ function ConvertHandler() {
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
     var result;
-    
+    switch (initUnit) {
+      case 'gal': result = initNum * galToL; break;
+      case 'L': result = initNum / galToL; break;
+      case 'lbs': result = initNum * lbsToKg; break;
+      case 'kg': result = initNum / lbsToKg; break;
+      case 'mi': result = initNum * miToKm; break;
+      case 'km': result = initNum / miToKm; break;
+    }
     return result;
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
+    const unitStr = {
+      gallon
+    }
     var result;
-    
+    var fromUnit = initNum
+    result = `${initNum} ${fromUnit} converts to ${returnNum} ${toUnit}`
     return result;
   };
   
