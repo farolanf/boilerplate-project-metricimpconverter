@@ -10,14 +10,9 @@ function ConvertHandler() {
 
   this.getNum = function(input) {
     var result = 1;
-    const match = input.match(/^(-?[0-9.,/]+)/)
+    const match = input.match(/^(-?\d+(?:\.\d*)?)/)
     if (match) {
-      try {
-        eval('result = ' + match[1])
-      }
-      catch (x) {
-        result = 'invalid number'
-      }
+      result = match[1]
     }
     return result;
   };
