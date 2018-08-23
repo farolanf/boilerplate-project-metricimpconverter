@@ -15,10 +15,6 @@ var convertHandler = new ConvertHandler();
 /* global suite test */
 suite('Unit Tests', function(){
 
-  // const galToL = 3.78541;
-  // const lbsToKg = 0.453592;
-  // const miToKm = 1.60934;
-
   suite('Function convertHandler.getNum(input)', function() {
     
     test('Whole number input', function(done) {
@@ -46,14 +42,15 @@ suite('Unit Tests', function(){
     });
     
     test('Invalid Input (double fraction)', function(done) {
-      var input = '0.1/0.2L';
-      assert.equal(convertHandler.getNum(input), 0.5);
+      var input = '0..2L';
+      assert.equal(convertHandler.getNum(input), false);
       done();
     });
     
     test('No Numerical Input', function(done) {
-      
-      //done();
+      var input = 'L';
+      assert.equal(convertHandler.getNum(input), 1);
+      done();
     }); 
     
   });
@@ -63,14 +60,14 @@ suite('Unit Tests', function(){
     test('For Each Valid Unit Inputs', function(done) {
       var input = ['gal','l','mi','km','lbs','kg','GAL','L','MI','KM','LBS','KG'];
       input.forEach(function(ele) {
-        //assert
+        assert.equal(convertHandler.getUnit('1' + ele), ele)
       });
       done();
     });
     
     test('Unknown Unit Input', function(done) {
-      
-      //done();
+      assert.equal(convertHandler.getUnit('1lo'), false)
+      done();
     });  
     
   });

@@ -8,19 +8,8 @@
 
 function ConvertHandler() {
 
-  const pairs = {
-    gal: 'L',
-    lbs: 'kg',
-    mi: 'km'
-  }
-
-  const pairsReverse = Object.keys(pairs).reduce((obj, key, pairs) => {
-    obj[pairs[key]] = key
-    return obj
-  }, {})
-  
   this.getNum = function(input) {
-    var result = null;
+    var result = 1;
     const match = input.match(/^(-?[0-9.,/]+)/)
     if (match) {
       try {
@@ -35,7 +24,7 @@ function ConvertHandler() {
   
   this.getUnit = function(input) {
     var result = false;
-    const match = input.match(/(gal|L|lbs|kg|mi|km)\s*$/)
+    const match = input.match(/(gal|L|lbs|kg|mi|km)\s*$/i)
     if (match) {
       result = match[1]
     }
@@ -43,10 +32,12 @@ function ConvertHandler() {
   };
   
   this.getReturnUnit = function(initUnit) {
+    const input = ['gal', 'l', 'lbs', 'kg', 'mi', 'km']
+    const expect = ['l', 'gal', 'kg', 'lbs', 'km', 'mi']
     var result;
-    result = pairs[initUnit] ? pairs[initUnit] 
-      : pairsReverse[initUnit] ? pairsReverse[initUnit] : false
-    return result;
+    const i = input.indexOf(initUnit)
+    if (i === -1) return false
+    return result = expect[i];
   };
 
   this.spellOutUnit = function(unit) {
@@ -72,20 +63,8 @@ function ConvertHandler() {
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    const unitStr = {
-      gal1: 'gallon',
-      gal: 'gallons',
-      L1: 'litre',
-      L: 'litres',
-      lbs1: 'pound',
-      lbs: 'pounds',
-      mi1: 'mile',
-      mi: 'miles',
-      km1: 'kilometer',
-      km: 'kilometers'
-    }
     var result;
-    var fromUnit = Math.abs(initNum) === 1 ? unitStr[initUnit + '1'] : unitStr[initUnit]
+    var fromUnit = this.spellOutUnit(init
     var toUnit = Math.abs(returnNum) === 1 ? unitStr[returnUnit + '1'] : unitStr[returnUnit]
     result = `${initNum} ${fromUnit} converts to ${returnNum} ${toUnit}`
     return result;
